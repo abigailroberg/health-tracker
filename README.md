@@ -13,7 +13,7 @@ simple caloric notes and smart watch-reported steps to in-depth recipe ideas and
 Health Hacker was built using the MERN stack by:
 
 * [Abigail](https://github.com/abigailroberg)
-* [Megha]()
+* [Megha](meghasamala)
 * [Abraham](https://github.com/abrahampre)
 * [Will](https://github.com/wsbousman)
 ***
