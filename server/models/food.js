@@ -34,4 +34,6 @@ foodSchema.virtual('CaloricValue').get(function() {
   return this.caloricValue.value;
 });
 
-module.exports = foodSchema
+const Food = model('Food', foodSchema)
+
+module.exports = Food
