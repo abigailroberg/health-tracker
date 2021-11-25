@@ -51,6 +51,10 @@ userSchema.pre('save', async function (next) {
     return bcrypt.compare(password, this.password);
   };
 
+userSchema.virtual('CaloricValue').get(function() {
+  return this.food.caloricValue - this.activities.caloricValue;
+  });
+
 const user = model('user', userSchema);
 
 module.exports = user;

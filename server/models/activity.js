@@ -29,8 +29,4 @@ const activitySchema = new Schema({
       }
     });
 
-activitySchema.virtual('caloricValue').get(function() {
-  return this.caloricValue.value;
-});
-
 module.exports = activitySchema

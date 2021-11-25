@@ -30,8 +30,4 @@ const foodSchema = new Schema({
     }
   );
 
-foodSchema.virtual('CaloricValue').get(function() {
-  return this.caloricValue.value;
-});
-
 module.exports = foodSchema
