@@ -8,7 +8,7 @@ const typeDefs = gql`
         email: String
         friends: [User]
         activities: [Activity]
-        food: [Food]
+        foods: [Food]
     }
 
     type Activity {
