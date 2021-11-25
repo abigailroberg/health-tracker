@@ -21,14 +21,20 @@ const userSchema = new Schema({
     friends: [
         {
             type: Schema.Types.ObjectId,
-            ref: 'user'
+            ref: 'User'
         }
     ],
     activities: [
-        activitySchema
-    ],   
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Activity'
+        }
+      ],   
     food: [
-       foodSchema
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Food'
+        }
     ]
   },
   {
