@@ -4,14 +4,14 @@ const secret = 'healthtrackersecret';
 const expiration = '2h';
 
 module.exports = {
-  authMiddleware: function (req, res, next) {
-    let token = req.query.token || req.headers.authorization;
+  authMiddleware: function ({ req }) {
+    let token = req.body.token || req.query.token || req.headers.authorization;
 
     // split token string into array, remove last index, trim whitepsace
     if (req.headers.authorization) {token = token.split(' ').pop().trim();}
 
     // no token err message
-    if (!token) {return res.status(400).json({ message: 'You have no token!' });}
+    if (!token) return req
 
     // verify token
     try {
@@ -23,7 +23,8 @@ module.exports = {
       console.log('Invalid token');
       return res.status(400).json({ message: 'invalid token!' });
     }
-    next();
+    
+    return req
   },
   // add user data to token
   signToken: function ({ username, email, _id }) {
