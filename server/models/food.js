@@ -30,4 +30,31 @@ const foodSchema = new Schema({
     }
   );
 
+/*
+const filter = function() {
+    emit(this.caloricValue);
+};
+
+const reduce = function(caloricValue) {
+  const total = Array.sum(caloricValue);
+  return total
+};
+
+db.foodSchema.mapReduce(
+  filter,
+  reduce,
+  { out: "foodValue" }
+);
+
+foodSchema.virtual('FoodValue').get(function() {
+  db.foodValue.find()
+});
+
+module.exports = foodSchema, db.foodValue
+*/
+
+foodSchema.virtual('FoodValue').get(function() {
+  return this.caloricValue
+  });
+
 module.exports = foodSchema

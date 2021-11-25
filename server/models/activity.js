@@ -29,4 +29,31 @@ const activitySchema = new Schema({
       }
     });
 
+/*
+const filter = function() {
+    emit(this.caloricValue);
+};
+
+const reduce = function(caloricValue) {
+  const total = Array.sum(caloricValue);
+  return total
+};
+
+db.activitySchema.mapReduce(
+  filter,
+  reduce,
+  { out: "activityValue" }
+);
+
+activitySchema.virtual('activityValue').get(function() {
+  db.activityValue.find()
+});
+
+module.exports = activitySchema, db.activityValue
+*/
+
+activitySchema.virtual('activityValue').get(function() {
+  return this.caloricValue
+  });
+
 module.exports = activitySchema

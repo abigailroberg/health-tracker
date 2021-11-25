@@ -53,13 +53,19 @@ userSchema.pre('save', async function (next) {
     next();
   });
   
-  userSchema.methods.isCorrectPassword = async function (password) {
+userSchema.methods.isCorrectPassword = async function (password) {
     return bcrypt.compare(password, this.password);
   };
 
 userSchema.virtual('CaloricValue').get(function() {
   return this.food.caloricValue - this.activities.caloricValue;
   });
+
+/*
+userSchema.virtual('CaloricValue').get(function() {
+  return db.foodValue - db.activityValue;
+  });
+*/
 
 const user = model('user', userSchema);
 
