@@ -45,5 +45,75 @@ const resolvers = {
         food: async (parent, { _id }) => {
             return Food.findOne({ _id })
         }
+    },
+
+    Mutation: {
+        addUser: async (parent, args) => {
+            const user = await User.create(args)
+            const token = signToken(user)
+
+            return { token, user }
+        },
+        login: async (parent, { email, password }) => {
+            const user = await User.findOne({ email })
+
+            if (!user) {
+                throw new AuthenticationError('Incorrect login details!')
+            }
+
+            const correctPW = await user.isCorrectPassword(password)
+
+            if (!correctPW) {
+                throw new AuthenticationError('Incorrect login details!')
+            }
+
+            const token = signToken(user)
+            return { token, user }
+        },
+        addActivity: async (parent, args, context) => {
+            if (context.user) {
+                const activity = await Activity.create({ ...args, username: context.username, })
+
+                await User.findByIdAndUpdate(
+                    { _id: context.user._id },
+                    { $push: { activities: activity._id } },
+                    { new: true }
+                )
+
+                return activity
+            }
+
+            throw new AuthenticationError('You need to be logged in to record activity!')
+        },
+        addFood: async (parent, args, context) => {
+            if (context.user) {
+                const food = await Food.create({ ...args, username: context.username, })
+
+                await User.findByIdAndUpdate(
+                    { _id: context.user._id },
+                    { $push: { foods: food._id } },
+                    { new: true }
+                )
+
+                return food
+            }
+
+            throw new AuthenticationError('You need to be logged in to record food!')
+        },
+        addFriend: async (parent, { friendId }, context) => {
+            if (context.user) {
+                const updatedUser = await User.findOneAndUpdate(
+                    { _id: context.user._id },
+                    { $addToSet: { friends: friendId } },
+                    { new: true }
+                ).populate('friends')
+
+                return updatedUser
+            }
+
+            throw new AuthenticationError('You need to be logged in to add a friend!')
+        }
     }
 }
+
+module.exports = resolvers
