@@ -2,21 +2,21 @@ import React, { useState } from 'react';
 
 import { useMutation } from '@apollo/react-hooks';
 import { ADD_THOUGHT } from '../../utils/mutations';
-import { QUERY_THOUGHTS, QUERY_ME } from '../../utils/queries';
+import { QUERY_FOODS, QUERY_ME } from '../../utils/queries';
 
-const ThoughtForm = () => {
-  const [thoughtText, setText] = useState('');
+const FoodForm = () => {
+  const [type, setText] = useState('');
   const [characterCount, setCharacterCount] = useState(0);
 
-  const [addThought, { error }] = useMutation(ADD_THOUGHT, {
-    update(cache, { data: { addThought } }) {
+  const [addFood, { error }] = useMutation(ADD_FOOD, {
+    update(cache, { data: { addFood } }) {
       try {
         // update thought array's cache
         // could potentially not exist yet, so wrap in a try/catch
-        const { thoughts } = cache.readQuery({ query: QUERY_THOUGHTS });
+        const { foods } = cache.readQuery({ query: QUERY_FOODS });
         cache.writeQuery({
-          query: QUERY_THOUGHTS,
-          data: { thoughts: [addThought, ...thoughts] }
+          query: QUERY_FOODS,
+          data: { foods: [addFood, ...foods] }
         });
       } catch (e) {
         console.error(e);
@@ -26,7 +26,7 @@ const ThoughtForm = () => {
       const { me } = cache.readQuery({ query: QUERY_ME });
       cache.writeQuery({
         query: QUERY_ME,
-        data: { me: { ...me, thoughts: [...me.thoughts, addThought] } }
+        data: { me: { ...me, foods: [...me.foods, addFood] } }
       });
     }
   });
@@ -44,8 +44,8 @@ const ThoughtForm = () => {
     event.preventDefault();
 
     try {
-      await addThought({
-        variables: { thoughtText }
+      await addFood({
+        variables: { type }
       });
 
       // clear form value
@@ -80,4 +80,4 @@ const ThoughtForm = () => {
   );
 };
 
-export default ThoughtForm;
+export default FoodForm;
