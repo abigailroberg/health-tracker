@@ -33,4 +33,6 @@ activitySchema.virtual('caloricValue').get(function() {
   return this.caloricValue.value;
 });
 
-module.exports = activitySchema
+const Activity = model('Activity', activitySchema)
+
+module.exports = Activity

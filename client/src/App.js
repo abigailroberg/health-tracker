@@ -6,16 +6,16 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 
 
-//Connect to the back end
+// Connect to the back end
 
-// const httpLink = createHttpLink({
-//   uri: 'http://localhost:3001/graphql',
-// });
+const httpLink = createHttpLink({
+  uri: 'http://localhost:3001/graphql',
+});
 
-// const client = new ApolloClient({
-//   link: httpLink,
-//   cache: new InMemoryCache(),
-// });
+const client = new ApolloClient({
+  link: httpLink,
+  cache: new InMemoryCache(),
+});
 
 
 
