@@ -1,4 +1,4 @@
-const { Schema, model, Types } = require('mongoose');
+const { Schema } = require('mongoose');
 const dateFormat = require('../utils/dateFormat');
 
 const foodSchema = new Schema({
