@@ -2,6 +2,8 @@ import React from 'react';
 import ActivityList from '../components/ActivityList';
 import ActivityForm from '../components/ActivityForm';
 import FriendList from '../components/FriendList';
+import FoodList from '../components/FoodList';
+import FoodForm from '../components/FoodForm';
 
 import Auth from '../utils/auth';
 import { useQuery } from '@apollo/react-hooks';
@@ -11,6 +13,7 @@ const Home = () => {
   const { loading, data } = useQuery(QUERY_ACTIVITIES);
   const { data:userData } = useQuery(QUERY_ME_BASIC)
   const activities = data?.activities || [];
+  const food = data?.food || [];
 
   const loggedIn = Auth.loggedIn();
 
@@ -26,7 +29,12 @@ const Home = () => {
           {loading ? (
             <div>Loading...</div>
           ) : (
+            <div>
             <ActivityList activities={activities} title="Some Feed for Thought(s)..." />
+            <FoodList food={food} />
+            <ActivityForm />
+            <FoodForm />
+            </div>
           )}
         </div>
         {loggedIn && userData ? (

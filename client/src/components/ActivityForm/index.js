@@ -67,7 +67,7 @@ const ActivityForm = () => {
         onSubmit={handleFormSubmit}
       >
         <textarea
-          placeholder="Here's a new thought..."
+          placeholder="Add some activities..."
           value={type}
           className="form-input col-12 col-md-9"
           onChange={handleChange}

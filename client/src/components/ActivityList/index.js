@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const ActivityList = ({ activities, title }) => {
   if (!activities.length) {
-    return <h3>No activities Yet</h3>;
+    return <h3>No activities yet</h3>;
   }
 
   return (
@@ -26,7 +26,7 @@ const ActivityList = ({ activities, title }) => {
               <Link to={`/activity/${activity._id}`}>
                 <p>{activity.type}</p>
                 <p className="mb-0">
-                {/* reactions deleted                */}
+                {/*comments*/}
                 </p>
               </Link>
             </div>

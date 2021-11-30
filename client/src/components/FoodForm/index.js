@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import { useMutation } from '@apollo/react-hooks';
-import { ADD_THOUGHT } from '../../utils/mutations';
+import { ADD_FOOD } from '../../utils/mutations';
 import { QUERY_FOODS, QUERY_ME } from '../../utils/queries';
 
 const FoodForm = () => {
@@ -67,8 +67,8 @@ const FoodForm = () => {
         onSubmit={handleFormSubmit}
       >
         <textarea
-          placeholder="Here's a new thought..."
-          value={thoughtText}
+          placeholder="Add some foods..."
+          value={type}
           className="form-input col-12 col-md-9"
           onChange={handleChange}
         ></textarea>

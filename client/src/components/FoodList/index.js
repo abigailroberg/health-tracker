@@ -1,16 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const FoodList = ({ foods, title }) => {
-  if (!foods.length) {
-    return <h3>No Foods Yet</h3>;
+const FoodList = ({ food, title }) => {
+  if (!food.length) {
+    return <h3>No foods yet</h3>;
   }
 
   return (
     <div>
       <h3>{title}</h3>
-      {foods &&
-        foods.map(food => (
+      {food &&
+        food.map(food => (
           <div key={food._id} className="card mb-3">
             <p className="card-header">
               <Link
@@ -26,7 +26,7 @@ const FoodList = ({ foods, title }) => {
               <Link to={`/food/${food._id}`}>
                 <p>{food.type}</p>
                 <p className="mb-0">
-                  {/* reactions deleted                */}
+                  {/*comments*/}
                 </p>
               </Link>
             </div>
