@@ -67,8 +67,20 @@ const ActivityForm = () => {
         onSubmit={handleFormSubmit}
       >
         <textarea
-          placeholder="Here's a new thought..."
+          placeholder="What kind of activity did you do?"
           value={type}
+          className="form-input col-12 col-md-9"
+          onChange={handleChange}
+        ></textarea>
+        <textarea
+          placeholder="How many calories did you burn?"
+          value={caloricValue}
+          className="form-input col-12 col-md-9"
+          onChange={handleChange}
+        ></textarea>
+        <textarea
+          placeholder="More about this activity..."
+          value={details}
           className="form-input col-12 col-md-9"
           onChange={handleChange}
         ></textarea>

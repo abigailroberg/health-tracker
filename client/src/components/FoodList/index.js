@@ -25,6 +25,8 @@ const FoodList = ({ foods, title }) => {
             <div className="card-body">
               <Link to={`/food/${food._id}`}>
                 <p>{food.type}</p>
+                <p>{food.caloricValue}</p>
+                <p>{food.details}</p>
                 <p className="mb-0">
                   {/* reactions deleted                */}
                 </p>
