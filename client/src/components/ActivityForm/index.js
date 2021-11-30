@@ -45,11 +45,9 @@ const ActivityForm = () => {
     console.log({ ...formState })
 
     try {
-      const activity = await addActivity({ 
+      await addActivity({ 
         variables: { ...formState }
       });
-
-      console.log(activity)
 
       // clear form value
       setFormState({
