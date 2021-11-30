@@ -1,10 +1,10 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
-import CommentList from '../components/CommentList';
-import CommentForm from '../components/CommentForm';
+// import CommentList from '../components/CommentList';
+// import CommentForm from '../components/CommentForm';
 
-import Auth from '../utils/auth';
+// import Auth from '../utils/auth';
 import { useQuery } from '@apollo/react-hooks';
 import { QUERY_ACTIVITY } from '../utils/queries';
 
@@ -22,7 +22,7 @@ const SingleActivity = props => {
   }
 
   return (
-    <div>
+    
       <div className="card mb-3">
         <p className="card-header">
           <span style={{ fontWeight: 700 }} className="text-light">
@@ -34,12 +34,13 @@ const SingleActivity = props => {
           <p>{activity.type}</p>
         </div>
       </div>
-      {/* change to comments */}
-      {activity.commentCount > 0 && <CommentList comment={activity.comment} />}
+      /* change to comments */
+      /* {activity.commentCount > 0 && <CommentList comment={activity.comment} />}
 
       {Auth.loggedIn() && <CommentForm activityId={activity._id} />}
-    </div>
+    </div> */
   );
 };
+
 
 export default SingleActivity;

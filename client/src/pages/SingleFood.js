@@ -1,10 +1,10 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
-import CommentList from '../components/CommentList';
-import CommentForm from '../components/CommentForm';
+// import CommentList from '../components/CommentList';
+// import CommentForm from '../components/CommentForm';
 
-import Auth from '../utils/auth';
+// import Auth from '../utils/auth';
 import { useQuery } from '@apollo/react-hooks';
 import { QUERY_FOOD } from '../utils/queries';
 
@@ -35,9 +35,9 @@ const SingleFood = props => {
         </div>
       </div>
       {/* change to comments */}
-      {food.commentCount > 0 && <CommentList comment={food.comment} />}
+      {/* {food.commentCount > 0 && <CommentList comment={food.comment} />}
 
-      {Auth.loggedIn() && <CommentForm foodId={food._id} />}
+      {Auth.loggedIn() && <CommentForm foodId={food._id} />} */}
     </div>
   );
 };

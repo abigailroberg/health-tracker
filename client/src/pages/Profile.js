@@ -1,5 +1,5 @@
 import React from 'react';
-import { Redirect, useParams } from 'react-router-dom';
+import { Navigate, useParams } from 'react-router-dom';
 
 import ActivityForm from '../components/ActivityForm';
 import ActivityList from '../components/ActivityList';
@@ -25,7 +25,7 @@ const Profile = props => {
     Auth.loggedIn() &&
     Auth.getProfile().data.username === userParam
   ) {
-    return <Redirect to="/profile" />;
+    return <Navigate to="/profile" />;
   }
 
   if (loading) {
