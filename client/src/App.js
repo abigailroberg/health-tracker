@@ -36,12 +36,12 @@ function App() {
           <Header />
           <div className="container">
             <Routes>
-              <Route exact path="/" component={Home} />
-              <Route exact path="/login" component={Login} />
-              <Route exact path="/signup" component={Signup} />
-              <Route exact path="/profile/:username?" component={Profile} />
-              <Route exact path="/activity/:id" component={SingleActivity} />
-              <Route exact path="/food/:id" component={SingleFood} />
+              <Route exact path="/" element={<Home/>} />
+              <Route exact path="/login" element={<Login/>} />
+              <Route exact path="/signup" element={<Signup/>} />
+              <Route exact path="/profile/:username?" element={<Profile/>} />
+              <Route exact path="/activity/:id" element={<SingleActivity/>} />
+              <Route exact path="/food/:id" element={<SingleFood/>} />
 
               <Route component={NoMatch} />
             </Routes>
