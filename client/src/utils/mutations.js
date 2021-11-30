@@ -44,6 +44,7 @@ export const ADD_ACTIVITY = gql`
       _id
       type
       caloricValue
+      details
       createdAt
       username
     }
@@ -56,6 +57,7 @@ export const ADD_FOOD = gql`
       _id
       type
       caloricValue
+      details
       createdAt
       username
     }

@@ -5,7 +5,8 @@ import { ADD_ACTIVITY } from '../../utils/mutations';
 import { QUERY_ACTIVITIES, QUERY_ME } from '../../utils/queries';
 
 const ActivityForm = () => {
-  const [type, setText] = useState('');
+  const [formState, setFormState] = useState({ type: '', caloricValue: '', details: ''});
+  const { type, caloricValue, details } = formState
   const [characterCount, setCharacterCount] = useState(0);
 
   const [addActivity, { error }] = useMutation(ADD_ACTIVITY, {
@@ -33,23 +34,22 @@ const ActivityForm = () => {
 
   // update state based on form input changes
   const handleChange = event => {
-    if (event.target.value.length <= 280) {
-      setText(event.target.value);
-      setCharacterCount(event.target.value.length);
-    }
+    if (event.target.name === 'caloricValue') {
+      const calorieInt = parseInt(event.target.value)
+      setFormState({ ...formState, [event.target.name]: calorieInt})
+    } else {setFormState({ ...formState, [event.target.name]: event.target.value })}
   };
 
   // submit form
   const handleFormSubmit = async event => {
     event.preventDefault();
+    console.log(formState)
 
     try {
-      await addActivity({
-        variables: { type }
-      });
+      await addActivity({ formState });
 
       // clear form value
-      setText('');
+      setFormState('');
       setCharacterCount(0);
     } catch (e) {
       console.error(e);
@@ -70,18 +70,22 @@ const ActivityForm = () => {
           placeholder="What kind of activity did you do?"
           value={type}
           className="form-input col-12 col-md-9"
+          name="type"
           onChange={handleChange}
         ></textarea>
-        <textarea
+        <input
           placeholder="How many calories did you burn?"
           value={caloricValue}
           className="form-input col-12 col-md-9"
+          type="number"
+          name="caloricValue"
           onChange={handleChange}
-        ></textarea>
+        ></input>
         <textarea
           placeholder="More about this activity..."
           value={details}
           className="form-input col-12 col-md-9"
+          name="details"
           onChange={handleChange}
         ></textarea>
         <button className="btn col-12 col-md-3" type="submit">
