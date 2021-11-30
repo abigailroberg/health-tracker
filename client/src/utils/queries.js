@@ -106,60 +106,6 @@ export const QUERY_FOOD = gql`
   }
 `;
 
-export const QUERY_USER = gql`
-  query user($username: String!) {
-    user(username: $username) {
-      _id
-      username
-      email
-      friendCount
-      friends {
-        _id
-        username
-      }
-      activities {
-        _id
-        type
-        caloricValue
-        createdAt
-      }
-      foods {
-        _id
-        type
-        caloricValue
-        createdAt
-      }
-    }
-  }
-`;
-
-export const QUERY_ME = gql`
-  {
-    me {
-      _id
-      username
-      email
-      friendCount
-      activities {
-        _id
-        type
-        caloricValue
-        createdAt
-      }
-      foods {
-        _id
-        type
-        caloricValue
-        createdAt
-      }
-      friends {
-        _id
-        username
-      }
-    }
-  }
-`;
-
 export const QUERY_ME_BASIC = gql`
   {
     me {
