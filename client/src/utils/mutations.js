@@ -39,8 +39,8 @@ export const ADD_FRIEND = gql`
 `;
 
 export const ADD_ACTIVITY = gql`
-  mutation addActivity($type: String!) {
-    addActivity(type: $type) {
+  mutation addActivity($type: String!, $caloricValue: Int!, $details: String) {
+    addActivity(type: $type, caloricValue: $caloricValue, details: $details) {
       _id
       type
       caloricValue

@@ -7,7 +7,6 @@ import { QUERY_ACTIVITIES, QUERY_ME } from '../../utils/queries';
 const ActivityForm = () => {
   const [formState, setFormState] = useState({ type: '', caloricValue: '', details: ''});
   const { type, caloricValue, details } = formState
-  const [characterCount, setCharacterCount] = useState(0);
 
   const [addActivity, { error }] = useMutation(ADD_ACTIVITY, {
     update(cache, { data: { addActivity } }) {
@@ -43,14 +42,21 @@ const ActivityForm = () => {
   // submit form
   const handleFormSubmit = async event => {
     event.preventDefault();
-    console.log(formState)
+    console.log({ ...formState })
 
     try {
-      await addActivity({ formState });
+      const activity = await addActivity({ 
+        variables: { ...formState }
+      });
+
+      console.log(activity)
 
       // clear form value
-      setFormState('');
-      setCharacterCount(0);
+      setFormState({
+        type: '',
+        caloricValue: '',
+        details: ''
+      });
     } catch (e) {
       console.error(e);
     }
@@ -58,8 +64,7 @@ const ActivityForm = () => {
 
   return (
     <div>
-      <p className={`m-0 ${characterCount === 280 || error ? 'text-error' : ''}`}>
-        Character Count: {characterCount}/280
+      <p>
         {error && <span className="ml-2">Something went wrong...</span>}
       </p>
       <form
