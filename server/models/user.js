@@ -21,14 +21,20 @@ const userSchema = new Schema({
     friends: [
         {
             type: Schema.Types.ObjectId,
-            ref: 'user'
+            ref: 'User'
         }
     ],
     activities: [
-        activitySchema
+        {
+          type: Schema.Types.ObjectId,
+          ref: 'Activity'
+        }
     ],   
     food: [
-       foodSchema
+       {
+         type: Schema.Types.ObjectId,
+         ref: 'Food'
+       }
     ]
   },
   {
@@ -51,6 +57,6 @@ userSchema.pre('save', async function (next) {
     return bcrypt.compare(password, this.password);
   };
 
-const user = model('user', userSchema);
+const User = model('User', userSchema);
 
-module.exports = user;
+module.exports = User;
