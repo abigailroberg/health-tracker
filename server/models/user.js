@@ -30,7 +30,7 @@ const userSchema = new Schema({
           ref: 'Activity'
         }
     ],   
-    food: [
+    foods: [
        {
          type: Schema.Types.ObjectId,
          ref: 'Food'

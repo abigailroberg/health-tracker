@@ -9,7 +9,7 @@ import { QUERY_ACTIVITIES, QUERY_ME_BASIC } from '../utils/queries';
 
 const Home = () => {
   const { loading, data } = useQuery(QUERY_ACTIVITIES);
-  const { data: userData } = useQuery(QUERY_ME_BASIC);
+  const { data:userData } = useQuery(QUERY_ME_BASIC)
   const activities = data?.activities || [];
 
   const loggedIn = Auth.loggedIn();

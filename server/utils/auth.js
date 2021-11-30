@@ -21,7 +21,6 @@ module.exports = {
     // invalid token catch
     catch {
       console.log('Invalid token');
-      return res.status(400).json({ message: 'invalid token!' });
     }
     
     return req
