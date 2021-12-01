@@ -25,6 +25,8 @@ const ActivityList = ({ activities, title }) => {
             <div className="card-body">
               <Link to={`/activity/${activity._id}`}>
                 <p>{activity.type}</p>
+                <p>{activity.caloricValue}</p>
+                <p>{activity.details}</p>
                 <p className="mb-0">
                 {/* reactions deleted                */}
                 </p>

@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 
 import { useMutation } from '@apollo/react-hooks';
-import { ADD_THOUGHT } from '../../utils/mutations';
+import { ADD_FOOD } from '../../utils/mutations';
 import { QUERY_FOODS, QUERY_ME } from '../../utils/queries';
 
 const FoodForm = () => {
-  const [type, setText] = useState('');
-  const [characterCount, setCharacterCount] = useState(0);
+  const [formState, setFormState] = useState({ type: '', caloricValue: '', details: ''});
+  const { type, caloricValue, details } = formState
 
   const [addFood, { error }] = useMutation(ADD_FOOD, {
     update(cache, { data: { addFood } }) {
@@ -33,10 +33,10 @@ const FoodForm = () => {
 
   // update state based on form input changes
   const handleChange = event => {
-    if (event.target.value.length <= 280) {
-      setText(event.target.value);
-      setCharacterCount(event.target.value.length);
-    }
+    if (event.target.name === 'caloricValue') {
+      const calorieInt = parseInt(event.target.value)
+      setFormState({ ...formState, [event.target.name]: calorieInt})
+    } else {setFormState({ ...formState, [event.target.name]: event.target.value })}
   };
 
   // submit form
@@ -45,12 +45,15 @@ const FoodForm = () => {
 
     try {
       await addFood({
-        variables: { type }
+        variables: { ...formState }
       });
 
       // clear form value
-      setText('');
-      setCharacterCount(0);
+      setFormState({
+        type: '',
+        caloricValue: '',
+        details: ''
+      });
     } catch (e) {
       console.error(e);
     }
@@ -58,8 +61,7 @@ const FoodForm = () => {
 
   return (
     <div>
-      <p className={`m-0 ${characterCount === 280 || error ? 'text-error' : ''}`}>
-        Character Count: {characterCount}/280
+      <p>
         {error && <span className="ml-2">Something went wrong...</span>}
       </p>
       <form
@@ -67,9 +69,25 @@ const FoodForm = () => {
         onSubmit={handleFormSubmit}
       >
         <textarea
-          placeholder="Here's a new thought..."
-          value={thoughtText}
+          placeholder="What kind of food did you eat?"
+          value={type}
           className="form-input col-12 col-md-9"
+          name="type"
+          onChange={handleChange}
+        ></textarea>
+        <input
+          placeholder="How many calories did you eat?"
+          value={caloricValue}
+          className="form-input col-12 col-md-9"
+          type="number"
+          name="caloricValue"
+          onChange={handleChange}
+        ></input>
+        <textarea
+          placeholder="More about this meal..."
+          value={details}
+          className="form-input col-12 col-md-9"
+          name="details"
           onChange={handleChange}
         ></textarea>
         <button className="btn col-12 col-md-3" type="submit">

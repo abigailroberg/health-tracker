@@ -6,6 +6,7 @@ import FriendList from '../components/FriendList';
 import Auth from '../utils/auth';
 import { useQuery } from '@apollo/react-hooks';
 import { QUERY_ACTIVITIES, QUERY_ME_BASIC } from '../utils/queries';
+import FoodForm from '../components/FoodForm';
 
 const Home = () => {
   const { loading, data } = useQuery(QUERY_ACTIVITIES);
@@ -19,7 +20,10 @@ const Home = () => {
       <div className="flex-row justify-space-between">
         {loggedIn && (
           <div className="col-12 mb-3">
+            <h1>Add your Activity!</h1>
             <ActivityForm />
+            <h1>Add your Food!</h1>
+            <FoodForm />
           </div>
         )}
         <div className={`col-12 mb-3 ${loggedIn && 'col-lg-8'}`}>

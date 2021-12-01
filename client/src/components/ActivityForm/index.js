@@ -5,8 +5,8 @@ import { ADD_ACTIVITY } from '../../utils/mutations';
 import { QUERY_ACTIVITIES, QUERY_ME } from '../../utils/queries';
 
 const ActivityForm = () => {
-  const [type, setText] = useState('');
-  const [characterCount, setCharacterCount] = useState(0);
+  const [formState, setFormState] = useState({ type: '', caloricValue: '', details: ''});
+  const { type, caloricValue, details } = formState
 
   const [addActivity, { error }] = useMutation(ADD_ACTIVITY, {
     update(cache, { data: { addActivity } }) {
@@ -33,24 +33,28 @@ const ActivityForm = () => {
 
   // update state based on form input changes
   const handleChange = event => {
-    if (event.target.value.length <= 280) {
-      setText(event.target.value);
-      setCharacterCount(event.target.value.length);
-    }
+    if (event.target.name === 'caloricValue') {
+      const calorieInt = parseInt(event.target.value)
+      setFormState({ ...formState, [event.target.name]: calorieInt})
+    } else {setFormState({ ...formState, [event.target.name]: event.target.value })}
   };
 
   // submit form
   const handleFormSubmit = async event => {
     event.preventDefault();
+    console.log({ ...formState })
 
     try {
-      await addActivity({
-        variables: { type }
+      await addActivity({ 
+        variables: { ...formState }
       });
 
       // clear form value
-      setText('');
-      setCharacterCount(0);
+      setFormState({
+        type: '',
+        caloricValue: '',
+        details: ''
+      });
     } catch (e) {
       console.error(e);
     }
@@ -58,8 +62,7 @@ const ActivityForm = () => {
 
   return (
     <div>
-      <p className={`m-0 ${characterCount === 280 || error ? 'text-error' : ''}`}>
-        Character Count: {characterCount}/280
+      <p>
         {error && <span className="ml-2">Something went wrong...</span>}
       </p>
       <form
@@ -67,9 +70,25 @@ const ActivityForm = () => {
         onSubmit={handleFormSubmit}
       >
         <textarea
-          placeholder="Here's a new thought..."
+          placeholder="What kind of activity did you do?"
           value={type}
           className="form-input col-12 col-md-9"
+          name="type"
+          onChange={handleChange}
+        ></textarea>
+        <input
+          placeholder="How many calories did you burn?"
+          value={caloricValue}
+          className="form-input col-12 col-md-9"
+          type="number"
+          name="caloricValue"
+          onChange={handleChange}
+        ></input>
+        <textarea
+          placeholder="More about this activity..."
+          value={details}
+          className="form-input col-12 col-md-9"
+          name="details"
           onChange={handleChange}
         ></textarea>
         <button className="btn col-12 col-md-3" type="submit">
