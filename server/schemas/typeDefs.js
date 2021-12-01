@@ -17,6 +17,7 @@ const typeDefs = gql`
         caloricValue: Int
         createdAt: String
         details: String
+        user: User
     }
 
     type Food {
@@ -25,6 +26,7 @@ const typeDefs = gql`
         caloricValue: Int
         createdAt: String
         details: String
+        user: User
     }
 
     type Auth {
@@ -36,9 +38,9 @@ const typeDefs = gql`
         me: User
         users: [User]
         user(username: String!): User
-        activities(username: String!): [Activity]
+        activities(username: String): [Activity]
         activity(_id: ID!): Activity
-        foods(username: String!): [Food]
+        foods(username: String): [Food]
         food(_id: ID!): Food
     }
 

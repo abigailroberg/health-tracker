@@ -46,20 +46,18 @@ export const ADD_ACTIVITY = gql`
       caloricValue
       details
       createdAt
-      username
     }
   }
 `;
 
 export const ADD_FOOD = gql`
-  mutation addFood($type: String!) {
-    addFood(type: $type) {
+  mutation addFood($type: String!, $caloricValue: Int!, $details: String) {
+    addFood(type: $type, caloricValue: $caloricValue, details: $details) {
       _id
       type
       caloricValue
       details
       createdAt
-      username
     }
   }
 `;
