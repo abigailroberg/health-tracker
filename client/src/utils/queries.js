@@ -95,7 +95,9 @@ export const QUERY_ACTIVITY = gql`
       type
       caloricValue
       createdAt
-      username
+      user {
+        username
+      }
     }
   }
 `;
@@ -107,7 +109,9 @@ export const QUERY_FOOD = gql`
       type
       caloricValue
       createdAt
-      username
+      user {
+        username
+      }
     }
   }
 `;
