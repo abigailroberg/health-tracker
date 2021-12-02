@@ -7,6 +7,7 @@ const typeDefs = gql`
         password: String
         email: String
         friends: [User]
+        friendCount: Int
         activities: [Activity]
         foods: [Food]
     }

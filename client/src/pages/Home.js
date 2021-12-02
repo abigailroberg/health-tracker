@@ -11,10 +11,10 @@ import FoodForm from '../components/FoodForm';
 
 const Home = () => {
   const { loading, data } = useQuery(QUERY_ACTIVITIES);
-  const { loadingFood, dataFood } = useQuery(QUERY_FOODS)
+  const { loading:loadingFood, data:dataFood } = useQuery(QUERY_FOODS)
 
   const { data:userData } = useQuery(QUERY_ME_BASIC)
-  
+
   const activities = data?.activities || [];
   const foods = dataFood?.foods || [];
 
